@@ -1,0 +1,11 @@
+datasets/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.ipynb_checkpoints/
+wandb/
+checkpoints/
+export/*.onnx
+export/*.tflite
+export/savedmodel/

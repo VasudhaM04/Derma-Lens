@@ -1,0 +1,41 @@
+model:
+  name: FairDermNet
+  backbone: mobilenetv3_large_100
+  pretrained: true
+  num_classes: 2
+  num_skin_tones: 6
+  input_size: [224, 224, 3]
+
+training:
+  batch_size: 32
+  epochs: 50
+  learning_rate: 0.0001
+  optimizer: adamw
+  weight_decay: 0.0001
+  lr_scheduler: cosine_annealing_warm_restarts
+  early_stopping_patience: 8
+
+  loss:
+    alpha: 1.0
+    beta: 0.15
+    gamma: 0.25
+
+data:
+  train_split: 0.70
+  val_split: 0.15
+  test_split: 0.15
+  stratify_by: [class, skin_tone]
+
+augmentation:
+  rotation_range: 180
+  horizontal_flip: true
+  vertical_flip: true
+  brightness_range: [0.8, 1.2]
+  contrast_range: [0.8, 1.2]
+  hue_shift_limit: 10
+  mixup_alpha: 0.2
+
+export:
+  quantization: int8
+  target_size_mb: 6
+  target_latency_ms: 25
